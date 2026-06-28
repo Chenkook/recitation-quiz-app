@@ -36,7 +36,8 @@ When you launch the application for the first time:
 
 1. Select option "1" to create a new profile
 2. Enter a username
-3. You will be taken to the main menu
+3. Enter a password (this password is required to delete your profile later)
+4. You will be taken to the main menu
 
 ### 3.2 Main Menu Options
 

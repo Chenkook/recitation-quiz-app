@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 import os
 
 
@@ -8,6 +8,7 @@ class ProfileScreen(tk.Frame):
         super().__init__(parent)
         self.parent = parent
         self.text_manager = managers["text_manager"]
+        self.user_manager = managers["user_manager"]
         self.theme_manager = managers.get("theme_manager")
         self.badge_images = {}
 
@@ -34,6 +35,13 @@ class ProfileScreen(tk.Frame):
             font=("Arial", 18, "bold")
         )
         self.title_label.pack(side=tk.LEFT)
+
+        self.delete_button = ttk.Button(
+            self.header_frame,
+            text="Delete Profile / 删除档案",
+            command=self._show_delete_dialog
+        )
+        self.delete_button.pack(side=tk.RIGHT, padx=5)
 
         self.back_button = ttk.Button(
             self.header_frame,
@@ -185,6 +193,75 @@ class ProfileScreen(tk.Frame):
 
     def _on_theme_change(self, colors):
         self.practiced_listbox.config(bg=colors["listbox"], fg=colors["listbox_fg"])
+
+    def _show_delete_dialog(self):
+        if not self.parent.current_user:
+            return
+
+        dialog = tk.Toplevel(self)
+        dialog.title("Delete Profile / 删除档案")
+        dialog.geometry("350x200")
+        dialog.resizable(False, False)
+
+        window_width = 350
+        window_height = 200
+        screen_width = dialog.winfo_screenwidth()
+        screen_height = dialog.winfo_screenheight()
+        x = (screen_width // 2) - (window_width // 2)
+        y = (screen_height // 2) - (window_height // 2)
+        dialog.geometry(f"{window_width}x{window_height}+{x}+{y}")
+
+        label = ttk.Label(
+            dialog,
+            text=f"Enter password to delete profile '{self.parent.current_user.username}':\n输入密码以删除档案:",
+            justify=tk.CENTER
+        )
+        label.pack(pady=20)
+
+        password_var = tk.StringVar()
+        password_entry = ttk.Entry(dialog, textvariable=password_var, show="*", width=30)
+        password_entry.pack(pady=10)
+        password_entry.focus()
+        password_entry.bind("<Return>", lambda e: self._confirm_delete(dialog, password_var.get()))
+
+        button_frame = ttk.Frame(dialog)
+        button_frame.pack(pady=10)
+
+        confirm_button = ttk.Button(
+            button_frame,
+            text="Confirm Delete / 确认删除",
+            command=lambda: self._confirm_delete(dialog, password_var.get())
+        )
+        confirm_button.pack(side=tk.LEFT, padx=5)
+
+        cancel_button = ttk.Button(
+            button_frame,
+            text="Cancel / 取消",
+            command=dialog.destroy
+        )
+        cancel_button.pack(side=tk.LEFT, padx=5)
+
+        dialog.transient(self.parent)
+        dialog.grab_set()
+
+    def _confirm_delete(self, dialog, password):
+        if not password:
+            messagebox.showwarning("Warning / 警告", "Please enter password.\n请输入密码。")
+            return
+
+        success = self.user_manager.delete_profile(self.parent.current_user.username, password)
+
+        if success:
+            messagebox.showinfo("Success / 成功", "Profile deleted successfully!\n档案删除成功！")
+            dialog.destroy()
+            self.parent.current_user = None
+            self.parent.managers["progress_tracker"] = None
+            self.parent.managers["review_scheduler"] = None
+            self.parent.managers["badge_manager"] = None
+            self.parent.managers["report_exporter"] = None
+            self.parent.show_screen("welcome")
+        else:
+            messagebox.showerror("Error / 错误", "Incorrect password.\n密码错误。")
 
     def _go_back(self):
         self.parent.show_screen("library")

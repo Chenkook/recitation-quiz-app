@@ -17,6 +17,7 @@ def main():
     output_dir = os.path.join(base_dir, "output")
 
     user_manager = UserProfileManager(data_dir)
+    user_manager.update_existing_users_password("123456")
     text_manager = TextManager(data_dir)
     quiz_generator = QuizGenerator()
     answer_checker = AnswerChecker()

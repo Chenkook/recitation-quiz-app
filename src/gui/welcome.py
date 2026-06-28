@@ -52,13 +52,22 @@ class WelcomeScreen(tk.Frame):
         self.username_label = ttk.Label(self.container, text="Username / 用户名:")
         self.username_entry = ttk.Entry(self.container, textvariable=self.username_var, width=30)
 
+        self.password_var = tk.StringVar()
+        self.password_label = ttk.Label(self.container, text="Password / 密码:")
+        self.password_entry = ttk.Entry(self.container, textvariable=self.password_var, show="*", width=30)
+
         self.profile_listbox = tk.Listbox(self.container, height=5, width=40)
 
     def update(self, **kwargs):
         self.username_var.set("")
+        self.password_var.set("")
         if hasattr(self, 'username_label'):
             self.username_label.pack_forget()
             self.username_entry.pack_forget()
+        if hasattr(self, 'password_label'):
+            self.password_label.pack_forget()
+            self.password_entry.pack_forget()
+        if hasattr(self, 'profile_listbox'):
             self.profile_listbox.pack_forget()
 
         if hasattr(self, 'submit_btn'):
@@ -82,6 +91,8 @@ class WelcomeScreen(tk.Frame):
     def _create_profile(self):
         self.username_label.pack(pady=10)
         self.username_entry.pack(pady=5)
+        self.password_label.pack(pady=10)
+        self.password_entry.pack(pady=5)
         self.profile_listbox.pack_forget()
 
         if hasattr(self, 'load_btn'):
@@ -93,7 +104,8 @@ class WelcomeScreen(tk.Frame):
             delattr(self, 'submit_btn')
 
         self.username_entry.focus()
-        self.username_entry.bind("<Return>", lambda e: self._submit_create())
+        self.username_entry.bind("<Return>", lambda e: self.password_entry.focus())
+        self.password_entry.bind("<Return>", lambda e: self._submit_create())
 
         submit_btn = ttk.Button(
             self.container,
@@ -109,7 +121,12 @@ class WelcomeScreen(tk.Frame):
             messagebox.showwarning("Warning / 警告", "Please enter a username.\n请输入用户名。")
             return
 
-        user = self.user_manager.create_profile(username)
+        password = self.password_var.get().strip()
+        if not password:
+            messagebox.showwarning("Warning / 警告", "Please enter a password.\n请输入密码。")
+            return
+
+        user = self.user_manager.create_profile(username, password)
         if user:
             self.parent.current_user = user
             self.parent.managers["progress_tracker"] = None
@@ -131,6 +148,8 @@ class WelcomeScreen(tk.Frame):
 
         self.username_label.pack_forget()
         self.username_entry.pack_forget()
+        self.password_label.pack_forget()
+        self.password_entry.pack_forget()
 
         if hasattr(self, 'submit_btn'):
             self.submit_btn.destroy()

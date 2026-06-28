@@ -4,8 +4,9 @@ from datetime import datetime, date
 
 
 class UserProfile:
-    def __init__(self, username):
+    def __init__(self, username, password=""):
         self.username = username
+        self.password = password
         self.current_streak = 0
         self.longest_streak = 0
         self.total_quizzes = 0
@@ -18,6 +19,7 @@ class UserProfile:
     def to_dict(self):
         return {
             "username": self.username,
+            "password": self.password,
             "current_streak": self.current_streak,
             "longest_streak": self.longest_streak,
             "total_quizzes": self.total_quizzes,
@@ -30,7 +32,7 @@ class UserProfile:
 
     @classmethod
     def from_dict(cls, data):
-        user = cls(data["username"])
+        user = cls(data["username"], data.get("password", ""))
         user.current_streak = data.get("current_streak", 0)
         user.longest_streak = data.get("longest_streak", 0)
         user.total_quizzes = data.get("total_quizzes", 0)
@@ -41,6 +43,9 @@ class UserProfile:
         if data.get("last_practice_date"):
             user.last_practice_date = date.fromisoformat(data["last_practice_date"])
         return user
+
+    def check_password(self, password):
+        return self.password == password
 
     def update_streak(self):
         today = date.today()
@@ -80,11 +85,11 @@ class UserProfileManager:
             with open(self.users_file, "w", encoding="utf-8") as f:
                 json.dump({"users": []}, f, ensure_ascii=False, indent=2)
 
-    def create_profile(self, username):
+    def create_profile(self, username, password=""):
         users = self._load_users()
         if any(u["username"] == username for u in users["users"]):
             return None
-        user = UserProfile(username)
+        user = UserProfile(username, password)
         users["users"].append(user.to_dict())
         self._save_users(users)
         return user
@@ -107,6 +112,17 @@ class UserProfileManager:
         self._save_users(users)
         return True
 
+    def delete_profile(self, username, password):
+        users = self._load_users()
+        for i, user_data in enumerate(users["users"]):
+            if user_data["username"] == username:
+                if user_data.get("password", "") == password:
+                    del users["users"][i]
+                    self._save_users(users)
+                    return True
+                return False
+        return False
+
     def _load_users(self):
         with open(self.users_file, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -118,3 +134,14 @@ class UserProfileManager:
     def get_all_usernames(self):
         users = self._load_users()
         return [u["username"] for u in users["users"]]
+
+    def update_existing_users_password(self, default_password="123456"):
+        users = self._load_users()
+        updated = False
+        for user_data in users["users"]:
+            if "password" not in user_data or not user_data["password"]:
+                user_data["password"] = default_password
+                updated = True
+        if updated:
+            self._save_users(users)
+        return updated

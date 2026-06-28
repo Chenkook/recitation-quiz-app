@@ -20,6 +20,7 @@ class RecitationQuizApp:
         self.output_dir = os.path.join(base_dir, "output")
 
         self.user_manager = UserProfileManager(self.data_dir)
+        self.user_manager.update_existing_users_password("123456")
         self.text_manager = TextManager(self.data_dir)
         self.quiz_generator = QuizGenerator()
         self.answer_checker = AnswerChecker()
