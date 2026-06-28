@@ -89,7 +89,7 @@ recitation_quiz_app/
 ### From Source
 
 ```bash
-git clone https://github.com/liao/recitation-quiz-app.git
+git clone https://github.com/Chenkook/recitation-quiz-app.git
 cd recitation-quiz-app
 pip install -e .
 ```
