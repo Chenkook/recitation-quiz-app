@@ -1,0 +1,34 @@
+{
+  "badges": [
+    {
+      "badge_id": "first_spark",
+      "name": "First Spark / 初燃之星",
+      "condition": "Complete the first quiz / 完成第一次测验"
+    },
+    {
+      "badge_id": "three_day_flame",
+      "name": "Three-Day Flame / 三日微焰",
+      "condition": "Maintain a 3-day streak / 连续学习 3 天"
+    },
+    {
+      "badge_id": "seven_day_scholar",
+      "name": "Seven-Day Scholar / 七日学者",
+      "condition": "Maintain a 7-day streak / 连续学习 7 天"
+    },
+    {
+      "badge_id": "precision_master",
+      "name": "Precision Master / 精准大师",
+      "condition": "Score 100% once / 获得一次满分"
+    },
+    {
+      "badge_id": "memory_sprinter",
+      "name": "Memory Sprinter / 记忆冲刺者",
+      "condition": "Complete 10 quizzes / 完成 10 次测验"
+    },
+    {
+      "badge_id": "text_explorer",
+      "name": "Text Explorer / 文本探索者",
+      "condition": "Practice 5 different texts / 练习 5 篇不同文本"
+    }
+  ]
+}

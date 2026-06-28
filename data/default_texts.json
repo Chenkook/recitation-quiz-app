@@ -1,0 +1,76 @@
+{
+  "texts": [
+    {
+      "text_id": "cn_poem_1",
+      "title": "静夜思",
+      "language": "中文",
+      "category": "诗歌",
+      "difficulty": 1,
+      "content": "床前明月光，疑是地上霜。举头望明月，低头思故乡。"
+    },
+    {
+      "text_id": "cn_poem_2",
+      "title": "春晓",
+      "language": "中文",
+      "category": "诗歌",
+      "difficulty": 1,
+      "content": "春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。"
+    },
+    {
+      "text_id": "cn_poem_3",
+      "title": "登鹳雀楼",
+      "language": "中文",
+      "category": "诗歌",
+      "difficulty": 1,
+      "content": "白日依山尽，黄河入海流。欲穷千里目，更上一层楼。"
+    },
+    {
+      "text_id": "en_poem_1",
+      "title": "The Road Not Taken",
+      "language": "English",
+      "category": "Poetry",
+      "difficulty": 2,
+      "content": "Two roads diverged in a yellow wood, And sorry I could not travel both. And be one traveler, long I stood. And looked down one as far as I could."
+    },
+    {
+      "text_id": "en_poem_2",
+      "title": "If I Were a Boy",
+      "language": "English",
+      "category": "Poetry",
+      "difficulty": 2,
+      "content": "If I were a boy, even just for a day. I'd roll out of bed in the morning. And throw on what I wanted and go. Drink beer with the guys and chase after girls."
+    },
+    {
+      "text_id": "cn_classic_1",
+      "title": "论语·学而",
+      "language": "中文",
+      "category": "古文",
+      "difficulty": 3,
+      "content": "学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？"
+    },
+    {
+      "text_id": "imported_7",
+      "title": "Poem",
+      "language": "English",
+      "category": "Custom",
+      "difficulty": 1,
+      "content": "This is a test text."
+    },
+    {
+      "text_id": "imported_8",
+      "title": "关雎",
+      "language": "中文",
+      "category": "古诗",
+      "difficulty": 3,
+      "content": "关关雎鸠，在河之洲。窈窕淑女，君子好逑。\n参差荇菜，左右流之。窈窕淑女，寤寐求之。\n求之不得，寤寐思服。悠哉悠哉，辗转反侧。\n参差荇菜，左右采之。窈窕淑女，琴瑟友之。\n参差荇菜，左右芼之。窈窕淑女，钟鼓乐之。"
+    },
+    {
+      "text_id": "imported_9",
+      "title": "樛木",
+      "language": "中文",
+      "category": "诗经",
+      "difficulty": 1,
+      "content": "樛木\n诗经·国风·周南〔先秦〕\n南有樛木，葛藟累之。乐只君子，福履绥之。\n南有樛木，葛藟荒之。乐只君子，福履将之。\n南有樛木，葛藟萦之。乐只君子，福履成之。"
+    }
+  ]
+}
