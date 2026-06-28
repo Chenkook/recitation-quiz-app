@@ -58,6 +58,17 @@ class WelcomeScreen(tk.Frame):
 
         self.profile_listbox = tk.Listbox(self.container, height=5, width=40)
 
+        self.feedback_frame = ttk.LabelFrame(self.container, text="Feedback / 问题反馈", padding=15)
+        self.feedback_frame.pack(pady=20, fill=tk.X)
+
+        self.feedback_text = ttk.Label(
+            self.feedback_frame,
+            text="Developer / 创作者: Liao Chenkuo\nEmail / 邮箱: littlekook@163.com\n\n如有问题或建议，请发送邮件联系！",
+            justify=tk.CENTER,
+            font=("Arial", 10)
+        )
+        self.feedback_text.pack()
+
     def update(self, **kwargs):
         self.username_var.set("")
         self.password_var.set("")
