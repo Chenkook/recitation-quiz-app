@@ -205,4 +205,7 @@ A: Your progress will be lost. We recommend backing up the `data/` directory per
 
 ## 8. Contact / 联系方式
 
-For support or feedback, please contact the developer.
+For support or feedback, please contact the developer:
+
+- **Name / 姓名**: Liao Chenkuo
+- **Email / 邮箱**: littlekook@163.com
