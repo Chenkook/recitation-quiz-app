@@ -2,7 +2,7 @@
 
 ## 智能背诵测验系统
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/liao/recitation-quiz-app)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Chenkook/recitation-quiz-app)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A self-contained intelligent recitation quiz application that uses rule-based algorithms to generate practice tasks, check answers, track learning progress, recommend review, and motivate users through a simple profile and badge system.
